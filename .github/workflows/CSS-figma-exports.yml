@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [css-export]
 
+permissions:
+  contents: write
+
 jobs:
   export:
     runs-on: ubuntu-latest
@@ -11,5 +14,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Display payload
-        run: echo "Received CSS export event from Figma!"
+      - name: Save Figma payload to file
+        run: |
+          echo "Received CSS export event from Figma!"
+          mkdir -p output
+          echo '${{ toJson(github.event.client_payload) }}' > output/export.json
+          echo "Payload written to output/export.json"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Figma Bot"
+          git config user.email "figma-bot@users.noreply.github.com"
+          git add output/export.json
+          git commit -m "Update CSS export from Figma [skip ci]" || echo "No changes to commit"
+          git push
