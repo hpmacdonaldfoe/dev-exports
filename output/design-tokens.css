@@ -1,7 +1,14 @@
 :root {
+  /* Colors */
   --color-primary: #ff0000;
-  --font-desktop-display-1-family: "Arial";
-  --font-desktop-display-1-size: 92px;
-  --font-desktop-display-1-weight: 700;
-  --font-desktop-display-1-line-height: 110.4%;
+
 }
+
+/* Fonts */
+.font-desktop-display-1 {
+  font-family: "Arial";
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 110.4%;
+}
+

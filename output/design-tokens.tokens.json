@@ -1,1 +1,21 @@
-{"color":{"primary":{"type":"color","value":"#ff0000"}},"font":{"desktop":{"display 1":{"type":"custom-fontStyle","value":{"fontSize":92,"fontFamily":"Arial","fontWeight":700,"lineHeight":110.4}}}}}
+{
+  "color": {
+    "primary": {
+      "type": "color",
+      "value": "#ff0000"
+    }
+  },
+  "font": {
+    "desktop": {
+      "display 1": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 92,
+          "fontFamily": "Arial",
+          "fontWeight": 700,
+          "lineHeight": 110.4
+        }
+      }
+    }
+  }
+}
