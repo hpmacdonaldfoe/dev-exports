@@ -4,88 +4,24 @@ on:
   repository_dispatch:
     types: [css-export]
 
-permissions:
-  contents: write
-
 jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Save incoming payload
-        run: |
-          mkdir -p output
-          echo '${{ github.event.client_payload.data }}' > output/design-tokens.tokens.json
-          echo "Saved payload to output/design-tokens.tokens.json"
-
-      - name: Convert JSON to CSS
+      - name: Print received data
+        env:
+          CLIENT_PAYLOAD: ${{ github.event.client_payload.data }}
         run: |
           node - <<'EOF'
-          const fs = require('fs');
-
-          // read the file that Figma pushed (adjust name/path if your payload uses a different key)
-          const path = 'output/design-tokens.tokens.json';
-          if (!fs.existsSync(path)) {
-            console.error('Token file not found:', path);
+          try {
+            const payload = JSON.parse(process.env.CLIENT_PAYLOAD);
+            console.log("Parsed payload:", payload);
+          } catch (e) {
+            console.error("Failed to parse payload:", e);
+            console.error("Raw payload:", process.env.CLIENT_PAYLOAD);
             process.exit(1);
           }
-
-          const json = JSON.parse(fs.readFileSync(path, 'utf8'));
-
-          // helper: convert names to kebab-case
-          function toKebab(str) {
-            return String(str).trim().replace(/\s+/g, '-').replace(/[^\w\-]/g, '').toLowerCase();
-          }
-
-          let css = ':root {\n';
-
-          // Walk object recursively and generate vars. Handles `color` and `font` token structures.
-          function walk(obj, prefix = '') {
-            for (const key of Object.keys(obj)) {
-              const info = obj[key];
-
-              // Colors (classic structure: info.type === 'color' and info.value is color)
-              if (info && info.type === 'color' && info.value) {
-                const varName = `--${prefix}${toKebab(key)}`;
-                css += `  ${varName}: ${info.value};\n`;
-                continue;
-              }
-
-              // Custom font-style (Figma tokens plugin uses e.g. type: 'custom-fontStyle')
-              if (info && info.type && info.type.toString().toLowerCase().includes('font') && info.value) {
-                const value = info.value;
-                const base = `--${prefix}${toKebab(key)}`;
-                if (value.fontFamily) css += `  ${base}-family: "${value.fontFamily}";\n`;
-                if (value.fontSize !== undefined) css += `  ${base}-size: ${value.fontSize}px;\n`;
-                if (value.fontWeight !== undefined) css += `  ${base}-weight: ${value.fontWeight};\n`;
-                if (value.lineHeight !== undefined) css += `  ${base}-line-height: ${value.lineHeight}${typeof value.lineHeight === 'number' ? '%' : ''};\n`;
-                if (value.letterSpacing !== undefined) css += `  ${base}-letter-spacing: ${value.letterSpacing}${typeof value.letterSpacing === 'number' ? 'px' : ''};\n`;
-                if (value.textDecoration !== undefined) css += `  ${base}-decoration: ${value.textDecoration};\n`;
-                if (value.textCase !== undefined) css += `  ${base}-case: ${value.textCase};\n`;
-                continue;
-              }
-
-              // If it's an object, recurse with updated prefix
-              if (info && typeof info === 'object') {
-                walk(info, `${prefix}${toKebab(key)}-`);
-              }
-            }
-          }
-
-          walk(json);
-
-          css += '}\n';
-
-          fs.writeFileSync('output/design-tokens.css', css, 'utf8');
-          console.log('✅ design-tokens.css generated at output/design-tokens.css');
           EOF
-
-      - name: Commit and push generated files
-        run: |
-          git config user.name "Figma Bot"
-          git config user.email "figma-bot@users.noreply.github.com"
-          git add output/design-tokens.tokens.json output/design-tokens.css
-          git commit -m "Update design tokens and generated CSS [skip ci]" || echo "No changes to commit"
-          git push
