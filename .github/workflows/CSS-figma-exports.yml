@@ -1,39 +1,91 @@
-Name: Convert JSON to CSS
-  run: |
-    node - <<'EOF'
-    const fs = require('fs');
+name: CSS Figma Export
 
-    const json = JSON.parse(fs.readFileSync('design-tokens.tokens.json', 'utf8'));
-    let css = ':root {\n';
+on:
+  repository_dispatch:
+    types: [css-export]
 
-    function toKebab(str) {
-      return str.replace(/\s+/g, '-').toLowerCase();
-    }
+permissions:
+  contents: write
 
-    function walk(obj, prefix = '') {
-      for (const key in obj) {
-        const info = obj[key];
-        if (info.type === 'color') {
-          css += `  --${prefix}${toKebab(key)}: ${info.value};\n`;
-        } else if (info.type === 'custom-fontStyle') {
-          const value = info.value;
-          const fontPrefix = `${prefix}${toKebab(key)}-`;
-          css += `  --${fontPrefix}font-family: ${value.fontFamily};\n`;
-          css += `  --${fontPrefix}font-size: ${value.fontSize}px;\n`;
-          css += `  --${fontPrefix}font-weight: ${value.fontWeight};\n`;
-          css += `  --${fontPrefix}line-height: ${value.lineHeight}%;\n`;
-          css += `  --${fontPrefix}letter-spacing: ${value.letterSpacing};\n`;
-          css += `  --${fontPrefix}text-decoration: ${value.textDecoration};\n`;
-          css += `  --${fontPrefix}text-case: ${value.textCase};\n`;
-        } else if (typeof info === 'object') {
-          walk(info, `${prefix}${toKebab(key)}-`);
-        }
-      }
-    }
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    walk(json);
-    css += '}\n';
+      - name: Save incoming payload
+        run: |
+          mkdir -p output
+          echo '${{ github.event.client_payload.data }}' > output/design-tokens.tokens.json
+          echo "Saved payload to output/design-tokens.tokens.json"
 
-    fs.writeFileSync('design-tokens.css', css);
-    console.log('✅ design-tokens.css generated!');
-    EOF
+      - name: Convert JSON to CSS
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+
+          // read the file that Figma pushed (adjust name/path if your payload uses a different key)
+          const path = 'output/design-tokens.tokens.json';
+          if (!fs.existsSync(path)) {
+            console.error('Token file not found:', path);
+            process.exit(1);
+          }
+
+          const json = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+          // helper: convert names to kebab-case
+          function toKebab(str) {
+            return String(str).trim().replace(/\s+/g, '-').replace(/[^\w\-]/g, '').toLowerCase();
+          }
+
+          let css = ':root {\n';
+
+          // Walk object recursively and generate vars. Handles `color` and `font` token structures.
+          function walk(obj, prefix = '') {
+            for (const key of Object.keys(obj)) {
+              const info = obj[key];
+
+              // Colors (classic structure: info.type === 'color' and info.value is color)
+              if (info && info.type === 'color' && info.value) {
+                const varName = `--${prefix}${toKebab(key)}`;
+                css += `  ${varName}: ${info.value};\n`;
+                continue;
+              }
+
+              // Custom font-style (Figma tokens plugin uses e.g. type: 'custom-fontStyle')
+              if (info && info.type && info.type.toString().toLowerCase().includes('font') && info.value) {
+                const value = info.value;
+                const base = `--${prefix}${toKebab(key)}`;
+                if (value.fontFamily) css += `  ${base}-family: "${value.fontFamily}";\n`;
+                if (value.fontSize !== undefined) css += `  ${base}-size: ${value.fontSize}px;\n`;
+                if (value.fontWeight !== undefined) css += `  ${base}-weight: ${value.fontWeight};\n`;
+                if (value.lineHeight !== undefined) css += `  ${base}-line-height: ${value.lineHeight}${typeof value.lineHeight === 'number' ? '%' : ''};\n`;
+                if (value.letterSpacing !== undefined) css += `  ${base}-letter-spacing: ${value.letterSpacing}${typeof value.letterSpacing === 'number' ? 'px' : ''};\n`;
+                if (value.textDecoration !== undefined) css += `  ${base}-decoration: ${value.textDecoration};\n`;
+                if (value.textCase !== undefined) css += `  ${base}-case: ${value.textCase};\n`;
+                continue;
+              }
+
+              // If it's an object, recurse with updated prefix
+              if (info && typeof info === 'object') {
+                walk(info, `${prefix}${toKebab(key)}-`);
+              }
+            }
+          }
+
+          walk(json);
+
+          css += '}\n';
+
+          fs.writeFileSync('output/design-tokens.css', css, 'utf8');
+          console.log('✅ design-tokens.css generated at output/design-tokens.css');
+          EOF
+
+      - name: Commit and push generated files
+        run: |
+          git config user.name "Figma Bot"
+          git config user.email "figma-bot@users.noreply.github.com"
+          git add output/design-tokens.tokens.json output/design-tokens.css
+          git commit -m "Update design tokens and generated CSS [skip ci]" || echo "No changes to commit"
+          git push
