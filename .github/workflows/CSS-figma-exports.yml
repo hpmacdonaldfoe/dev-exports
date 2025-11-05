@@ -1,4 +1,4 @@
-- name: Convert JSON to CSS
+Name: Convert JSON to CSS
   run: |
     node - <<'EOF'
     const fs = require('fs');
