@@ -8,20 +8,54 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Print received data
-        env:
-          CLIENT_PAYLOAD: ${{ github.event.client_payload.data }}
+      - name: Convert JSON to CSS
         run: |
           node - <<'EOF'
-          try {
-            const payload = JSON.parse(process.env.CLIENT_PAYLOAD);
-            console.log("Parsed payload:", payload);
-          } catch (e) {
-            console.error("Failed to parse payload:", e);
-            console.error("Raw payload:", process.env.CLIENT_PAYLOAD);
+          const fs = require('fs');
+
+          const payload = process.env.PAYLOAD || '';
+          if (!payload) {
+            console.error('❌ No payload found');
             process.exit(1);
           }
+
+          const data = JSON.parse(payload);
+          let css = ':root {\n';
+
+          // ---- COLORS ----
+          if (data.color) {
+            for (const [name, info] of Object.entries(data.color)) {
+              if (info.value) {
+                const varName = name.toLowerCase().replace(/\s+/g, '-');
+                css += `  --${varName}: ${info.value};\n`;
+              }
+            }
+          }
+
+          css += '}\n\n';
+
+          // ---- FONT STYLES ----
+          if (data.font) {
+            for (const [device, styles] of Object.entries(data.font)) {
+              for (const [styleName, styleData] of Object.entries(styles)) {
+                const value = styleData.value;
+                const className = styleName.toLowerCase().replace(/\s+/g, '-');
+                css += `.font-${device}-${className} {\n`;
+                if (value.fontFamily) css += `  font-family: ${value.fontFamily};\n`;
+                if (value.fontSize) css += `  font-size: ${value.fontSize}px;\n`;
+                if (value.fontWeight) css += `  font-weight: ${value.fontWeight};\n`;
+                if (value.lineHeight) css += `  line-height: ${value.lineHeight}%;\n`;
+                css += '}\n\n';
+              }
+            }
+          }
+
+          fs.writeFileSync('tokens.css', css);
+          console.log('✅ Generated tokens.css:');
+          console.log(css);
           EOF
+        env:
+          PAYLOAD: ${{ github.event.client_payload.data }}
