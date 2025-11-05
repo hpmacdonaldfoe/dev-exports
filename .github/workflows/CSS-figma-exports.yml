@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [css-export]
 
+permissions:
+  contents: write
+
 jobs:
   export:
     runs-on: ubuntu-latest
@@ -12,6 +15,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Convert JSON to CSS
+        env:
+          PAYLOAD: ${{ github.event.client_payload.data }}
         run: |
           node - <<'EOF'
           const fs = require('fs');
@@ -22,13 +27,21 @@ jobs:
             process.exit(1);
           }
 
-          const data = JSON.parse(payload);
+          let data;
+          try {
+            data = JSON.parse(payload);
+          } catch (err) {
+            console.error('❌ Failed to parse payload:', err);
+            console.error('Raw payload:', payload);
+            process.exit(1);
+          }
+
           let css = ':root {\n';
 
           // ---- COLORS ----
           if (data.color) {
             for (const [name, info] of Object.entries(data.color)) {
-              if (info.value) {
+              if (info && info.value) {
                 const varName = name.toLowerCase().replace(/\s+/g, '-');
                 css += `  --${varName}: ${info.value};\n`;
               }
@@ -41,21 +54,27 @@ jobs:
           if (data.font) {
             for (const [device, styles] of Object.entries(data.font)) {
               for (const [styleName, styleData] of Object.entries(styles)) {
-                const value = styleData.value;
+                const value = styleData && styleData.value ? styleData.value : null;
                 const className = styleName.toLowerCase().replace(/\s+/g, '-');
                 css += `.font-${device}-${className} {\n`;
-                if (value.fontFamily) css += `  font-family: ${value.fontFamily};\n`;
-                if (value.fontSize) css += `  font-size: ${value.fontSize}px;\n`;
-                if (value.fontWeight) css += `  font-weight: ${value.fontWeight};\n`;
-                if (value.lineHeight) css += `  line-height: ${value.lineHeight}%;\n`;
+                if (value && value.fontFamily) css += `  font-family: ${value.fontFamily};\n`;
+                if (value && value.fontSize !== undefined) css += `  font-size: ${value.fontSize}px;\n`;
+                if (value && value.fontWeight !== undefined) css += `  font-weight: ${value.fontWeight};\n`;
+                if (value && value.lineHeight !== undefined) css += `  line-height: ${value.lineHeight}%;\n`;
                 css += '}\n\n';
               }
             }
           }
 
-          fs.writeFileSync('tokens.css', css);
+          fs.writeFileSync('tokens.css', css, 'utf8');
           console.log('✅ Generated tokens.css:');
           console.log(css);
           EOF
-        env:
-          PAYLOAD: ${{ github.event.client_payload.data }}
+
+      - name: Commit and push generated CSS
+        run: |
+          git config --global user.name "Figma Bot"
+          git config --global user.email "figma-bot@users.noreply.github.com"
+          git add tokens.css
+          git commit -m "Update tokens.css from Figma [skip ci]" || echo "No changes to commit"
+          git push
