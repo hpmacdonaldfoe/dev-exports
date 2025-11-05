@@ -1,68 +1,39 @@
-name: CSS Figma Export
+- name: Convert JSON to CSS
+  run: |
+    node - <<'EOF'
+    const fs = require('fs');
 
-on:
-  repository_dispatch:
-    types: [css-export]
+    const json = JSON.parse(fs.readFileSync('design-tokens.tokens.json', 'utf8'));
+    let css = ':root {\n';
 
-permissions:
-  contents: write
+    function toKebab(str) {
+      return str.replace(/\s+/g, '-').toLowerCase();
+    }
 
-jobs:
-  export:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    function walk(obj, prefix = '') {
+      for (const key in obj) {
+        const info = obj[key];
+        if (info.type === 'color') {
+          css += `  --${prefix}${toKebab(key)}: ${info.value};\n`;
+        } else if (info.type === 'custom-fontStyle') {
+          const value = info.value;
+          const fontPrefix = `${prefix}${toKebab(key)}-`;
+          css += `  --${fontPrefix}font-family: ${value.fontFamily};\n`;
+          css += `  --${fontPrefix}font-size: ${value.fontSize}px;\n`;
+          css += `  --${fontPrefix}font-weight: ${value.fontWeight};\n`;
+          css += `  --${fontPrefix}line-height: ${value.lineHeight}%;\n`;
+          css += `  --${fontPrefix}letter-spacing: ${value.letterSpacing};\n`;
+          css += `  --${fontPrefix}text-decoration: ${value.textDecoration};\n`;
+          css += `  --${fontPrefix}text-case: ${value.textCase};\n`;
+        } else if (typeof info === 'object') {
+          walk(info, `${prefix}${toKebab(key)}-`);
+        }
+      }
+    }
 
-      - name: Save tokens from payload
-        run: |
-          echo '${{ github.event.client_payload.data }}' > tokens.json
+    walk(json);
+    css += '}\n';
 
-      - name: Convert JSON to CSS
-        run: |
-          node -e "
-          const fs = require('fs');
-          const data = JSON.parse(fs.readFileSync('tokens.json', 'utf8'));
-          let css = ':root {\\n';
-
-          // Colors
-          if (data.color) {
-            css += '  /* Colors */\\n';
-            for (const [name, info] of Object.entries(data.color)) {
-              const varName = '--color-' + name.replace(/\\s+/g, '-');
-              css += `  ${varName}: ${info.value};\\n`;
-            }
-            css += '\\n';
-          }
-
-          // Fonts
-          if (data.font) {
-            css += '  /* Fonts */\\n';
-            for (const [platform, styles] of Object.entries(data.font)) {
-              for (const [styleName, styleInfo] of Object.entries(styles)) {
-                const value = styleInfo.value || {};
-                const prefix = '--font-' + platform + '-' + styleName.replace(/\\s+/g, '-');
-                if (value.fontFamily) css += `  ${prefix}-family: ${value.fontFamily};\\n`;
-                if (value.fontSize) css += `  ${prefix}-size: ${value.fontSize}px;\\n`;
-                if (value.fontWeight) css += `  ${prefix}-weight: ${value.fontWeight};\\n`;
-                if (value.lineHeight) css += `  ${prefix}-line-height: ${value.lineHeight}%;\\n`;
-                if (value.letterSpacing !== undefined) css += `  ${prefix}-letter-spacing: ${value.letterSpacing};\\n`;
-                if (value.textDecoration) css += `  ${prefix}-decoration: ${value.textDecoration};\\n`;
-                if (value.textCase) css += `  ${prefix}-case: ${value.textCase};\\n`;
-              }
-            }
-            css += '\\n';
-          }
-
-          css += '}\\n';
-          fs.writeFileSync('tokens.css', css);
-          console.log('✅ CSS file created:\\n', css);
-          "
-
-      - name: Commit and push updated files
-        run: |
-          git config user.name "Figma Bot"
-          git config user.email "figma-bot@users.noreply.github.com"
-          git add tokens.json tokens.css
-          git commit -m 'Update design tokens and CSS export' || echo 'No changes to commit'
-          git push
+    fs.writeFileSync('design-tokens.css', css);
+    console.log('✅ design-tokens.css generated!');
+    EOF
