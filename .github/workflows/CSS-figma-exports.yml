@@ -11,21 +11,58 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Save Figma payload to JSON
+      - name: Save tokens from payload
         run: |
-          echo "Received CSS export event from Figma!"
-          mkdir -p output
+          echo '${{ github.event.client_payload.data }}' > tokens.json
 
-          # Write the token data to a proper JSON file
-          echo '${{ github.event.client_payload.tokens }}' | jq . > output/${{ github.event.client_payload.filename }}
+      - name: Convert JSON to CSS
+        run: |
+          node -e "
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('tokens.json', 'utf8'));
+          let css = ':root {\\n';
 
-      - name: Commit and push JSON
+          // Colors
+          if (data.color) {
+            css += '  /* Colors */\\n';
+            for (const [name, info] of Object.entries(data.color)) {
+              const varName = '--color-' + name.replace(/\\s+/g, '-');
+              css += `  ${varName}: ${info.value};\\n`;
+            }
+            css += '\\n';
+          }
+
+          // Fonts
+          if (data.font) {
+            css += '  /* Fonts */\\n';
+            for (const [platform, styles] of Object.entries(data.font)) {
+              for (const [styleName, styleInfo] of Object.entries(styles)) {
+                const value = styleInfo.value || {};
+                const prefix = '--font-' + platform + '-' + styleName.replace(/\\s+/g, '-');
+                if (value.fontFamily) css += `  ${prefix}-family: ${value.fontFamily};\\n`;
+                if (value.fontSize) css += `  ${prefix}-size: ${value.fontSize}px;\\n`;
+                if (value.fontWeight) css += `  ${prefix}-weight: ${value.fontWeight};\\n`;
+                if (value.lineHeight) css += `  ${prefix}-line-height: ${value.lineHeight}%;\\n`;
+                if (value.letterSpacing !== undefined) css += `  ${prefix}-letter-spacing: ${value.letterSpacing};\\n`;
+                if (value.textDecoration) css += `  ${prefix}-decoration: ${value.textDecoration};\\n`;
+                if (value.textCase) css += `  ${prefix}-case: ${value.textCase};\\n`;
+              }
+            }
+            css += '\\n';
+          }
+
+          css += '}\\n';
+          fs.writeFileSync('tokens.css', css);
+          console.log('✅ CSS file created:\\n', css);
+          "
+
+      - name: Commit and push updated files
         run: |
           git config user.name "Figma Bot"
           git config user.email "figma-bot@users.noreply.github.com"
-          git add output/
-          git commit -m "${{ github.event.client_payload.commitMessage || 'Update CSS tokens from Figma [skip ci]' }}" || echo "No changes to commit"
+          git add tokens.json tokens.css
+          git commit -m 'Update design tokens and CSS export' || echo 'No changes to commit'
           git push
