@@ -1,0 +1,11 @@
+:root {
+  --primary: #ff0000;
+}
+
+.font-desktop-display-1 {
+  font-family: Arial;
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 110.4%;
+}
+
