@@ -14,67 +14,110 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Convert JSON to CSS
+      - name: Parse payload and generate CSS
         env:
-          PAYLOAD: ${{ github.event.client_payload.data }}
+          RAW_CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
           node - <<'EOF'
           const fs = require('fs');
 
-          const payload = process.env.PAYLOAD || '';
-          if (!payload) {
-            console.error('❌ No payload found');
+          const raw = process.env.RAW_CLIENT_PAYLOAD || '';
+          if (!raw) {
+            console.error('❌ No raw client payload found (RAW_CLIENT_PAYLOAD is empty)');
             process.exit(1);
           }
+
+          // Parse the client_payload wrapper
+          let wrapper;
+          try {
+            wrapper = JSON.parse(raw);
+          } catch (e) {
+            console.error('❌ Failed to parse RAW_CLIENT_PAYLOAD:', e);
+            console.error('RAW:', raw);
+            process.exit(1);
+          }
+
+          // Extract actual token data. Common shapes:
+          // 1) wrapper.data is a JSON-string (escaped) -> need to JSON.parse(wrapper.data)
+          // 2) wrapper.data is already an object
+          // 3) payload may use wrapper.tokens or wrapper (the wrapper might already be the data)
+          let dataField = wrapper.data ?? wrapper.tokens ?? wrapper;
 
           let data;
           try {
-            data = JSON.parse(payload);
-          } catch (err) {
-            console.error('❌ Failed to parse payload:', err);
-            console.error('Raw payload:', payload);
+            if (typeof dataField === 'string') {
+              // often it's a stringified JSON inside the wrapper, parse it
+              data = JSON.parse(dataField);
+            } else {
+              // already an object
+              data = dataField;
+            }
+          } catch (e) {
+            console.error('❌ Failed to parse inner dataField as JSON:', e);
+            console.error('dataField (raw):', dataField);
             process.exit(1);
           }
 
+          // Save pretty JSON for debugging / commits
+          fs.mkdirSync('output', { recursive: true });
+          fs.writeFileSync('output/design-tokens.tokens.json', JSON.stringify(data, null, 2), 'utf8');
+
+          // Build CSS
+          function toKebab(s){ return String(s).trim().replace(/\s+/g,'-').replace(/[^\w\-]/g,'').toLowerCase(); }
+
           let css = ':root {\n';
 
-          // ---- COLORS ----
-          if (data.color) {
+          // Colors
+          if (data.color && typeof data.color === 'object') {
+            css += '  /* Colors */\n';
             for (const [name, info] of Object.entries(data.color)) {
               if (info && info.value) {
-                const varName = name.toLowerCase().replace(/\s+/g, '-');
-                css += `  --${varName}: ${info.value};\n`;
+                css += `  --color-${toKebab(name)}: ${info.value};\n`;
               }
             }
+            css += '\n';
           }
 
           css += '}\n\n';
 
-          // ---- FONT STYLES ----
-          if (data.font) {
-            for (const [device, styles] of Object.entries(data.font)) {
-              for (const [styleName, styleData] of Object.entries(styles)) {
-                const value = styleData && styleData.value ? styleData.value : null;
-                const className = styleName.toLowerCase().replace(/\s+/g, '-');
-                css += `.font-${device}-${className} {\n`;
-                if (value && value.fontFamily) css += `  font-family: ${value.fontFamily};\n`;
-                if (value && value.fontSize !== undefined) css += `  font-size: ${value.fontSize}px;\n`;
-                if (value && value.fontWeight !== undefined) css += `  font-weight: ${value.fontWeight};\n`;
-                if (value && value.lineHeight !== undefined) css += `  line-height: ${value.lineHeight}%;\n`;
-                css += '}\n\n';
+          // Fonts: create utility classes and variables
+          if (data.font && typeof data.font === 'object') {
+            css += '/* Fonts */\n';
+            for (const [platform, styles] of Object.entries(data.font)) {
+              if (!styles || typeof styles !== 'object') continue;
+              for (const [styleName, styleObj] of Object.entries(styles)) {
+                const value = styleObj && styleObj.value ? styleObj.value : null;
+                const className = `font-${toKebab(platform)}-${toKebab(styleName)}`;
+                css += `.${className} {\n`;
+                if (value) {
+                  if (value.fontFamily) css += `  font-family: "${value.fontFamily}";\n`;
+                  if (value.fontSize !== undefined) css += `  font-size: ${value.fontSize}px;\n`;
+                  if (value.fontWeight !== undefined) css += `  font-weight: ${value.fontWeight};\n`;
+                  if (value.lineHeight !== undefined) {
+                    // if lineHeight seems like px vs percent, keep numeric but append % if reasonable
+                    css += `  line-height: ${value.lineHeight}${typeof value.lineHeight === 'number' ? '%' : ''};\n`;
+                  }
+                  if (value.letterSpacing !== undefined) css += `  letter-spacing: ${value.letterSpacing}${typeof value.letterSpacing === 'number' ? 'px' : ''};\n`;
+                  if (value.textDecoration !== undefined) css += `  text-decoration: ${value.textDecoration};\n`;
+                  if (value.textCase !== undefined) css += `  text-transform: ${value.textCase};\n`;
+                }
+                css += `}\n\n`;
               }
             }
           }
 
-          fs.writeFileSync('tokens.css', css, 'utf8');
-          console.log('✅ Generated tokens.css:');
+          // Write CSS output
+          fs.writeFileSync('output/design-tokens.css', css, 'utf8');
+
+          console.log('✅ Wrote output/design-tokens.tokens.json and output/design-tokens.css');
+          console.log('---- CSS preview ----');
           console.log(css);
           EOF
 
-      - name: Commit and push generated CSS
+      - name: Commit and push generated files
         run: |
-          git config --global user.name "Figma Bot"
-          git config --global user.email "figma-bot@users.noreply.github.com"
-          git add tokens.css
-          git commit -m "Update tokens.css from Figma [skip ci]" || echo "No changes to commit"
+          git config user.name "Figma Bot"
+          git config user.email "figma-bot@users.noreply.github.com"
+          git add output/design-tokens.tokens.json output/design-tokens.css
+          git commit -m "Update design tokens and CSS [skip ci]" || echo "No changes to commit"
           git push
