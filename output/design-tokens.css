@@ -1,80 +1,78 @@
 :root {
   /* Colors */
-  --color-primary-light: #e17240ff;
-  --color-primary-dark: #074568ff;
-  --color-primary-medium: #d9d9d9ff;
-  --color-header: #04344fff;
-  --color-paragraph: #000000ff;
-  --color-primary-button: #e17240ff;
-  --color-secondary-button: #ffffffff;
-  --color-primary-button---hover: #ffc6acff;
-  --color-secondary-button---hover: #8ad5ffff;
+  --color-heading: #35332fff;
+  --color-hover: #60869fff;
+  --color-primary-dark: #123850ff;
+  --color-light-background: #fff8f5ff;
+  --color-medium-background: #fff2ecff;
+  --color-light-stroke: #d9d9d9ff;
+  --color-flat-white: #ffffffff;
 
 }
 
 /* Fonts */
-.font-desktop-display-1 {
-  font-family: "Arial";
+.font-desktop-display---desktop {
+  font-family: "P22 Mackinac Pro";
   font-size: 92px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 110.4%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-h1 {
-  font-family: "Arial";
+.font-desktop-h1---deskop {
+  font-family: "P22 Mackinac Pro";
   font-size: 62px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 68%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-h2 {
-  font-family: "Arial";
+.font-desktop-h2---desktop {
+  font-family: "P22 Mackinac Pro";
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 55%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-h3 {
-  font-family: "Arial";
+.font-desktop-h3---desktop {
+  font-family: "P22 Mackinac Pro";
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 45%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-h4 {
-  font-family: "Arial";
+.font-desktop-h4---desktop {
+  font-family: "P22 Mackinac Pro";
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 38.4%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-h5 {
-  font-family: "Arial";
+.font-desktop-h5---desktop {
+  font-family: "P22 Mackinac Pro";
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 28.8%;
   letter-spacing: 0px;
   text-decoration: none;
   text-transform: none;
 }
 
-.font-desktop-p1 {
-  font-family: "Arial";
+.font-desktop-p1---desktop {
+  font-family: "Red Hat Display";
   font-size: 22px;
   font-weight: 400;
   line-height: 26.4%;
@@ -83,8 +81,8 @@
   text-transform: none;
 }
 
-.font-desktop-p2 {
-  font-family: "Arial";
+.font-desktop-p2---desktop {
+  font-family: "Red Hat Display";
   font-size: 18px;
   font-weight: 400;
   line-height: 26%;
@@ -93,8 +91,8 @@
   text-transform: none;
 }
 
-.font-desktop-p3 {
-  font-family: "Arial";
+.font-desktop-p3---desktop {
+  font-family: "Red Hat Display";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.2%;
@@ -103,8 +101,8 @@
   text-transform: none;
 }
 
-.font-desktop-p4 {
-  font-family: "Arial";
+.font-desktop-p4---desktop {
+  font-family: "Red Hat Display";
   font-size: 14px;
   font-weight: 400;
   line-height: 16.8%;
@@ -113,30 +111,30 @@
   text-transform: none;
 }
 
-.font-desktop-button-lrg {
-  font-family: "Arial";
+.font-desktop-button-lrg---desktop {
+  font-family: "Red Hat Display";
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 19.2%;
-  letter-spacing: 0.48px;
+  letter-spacing: 1.6px;
   text-decoration: none;
   text-transform: uppercase;
 }
 
-.font-desktop-button-small {
-  font-family: "Arial";
+.font-desktop-button-small---desktop {
+  font-family: "Red Hat Display";
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 14.4%;
-  letter-spacing: 0px;
+  letter-spacing: 0.96px;
   text-decoration: none;
   text-transform: uppercase;
 }
 
-.font-mobile-display-1---mobile {
-  font-family: "Arial";
+.font-mobile-display---mobile {
+  font-family: "P22 Mackinac Pro";
   font-size: 52px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 62.4%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -144,9 +142,9 @@
 }
 
 .font-mobile-h1---mobile {
-  font-family: "Arial";
+  font-family: "P22 Mackinac Pro";
   font-size: 46px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 55.2%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -154,9 +152,9 @@
 }
 
 .font-mobile-h2---mobile {
-  font-family: "Arial";
+  font-family: "P22 Mackinac Pro";
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 43.2%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -164,9 +162,9 @@
 }
 
 .font-mobile-h3---mobile {
-  font-family: "Arial";
+  font-family: "P22 Mackinac Pro";
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 38.4%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -174,9 +172,9 @@
 }
 
 .font-mobile-h4---mobile {
-  font-family: "Arial";
+  font-family: "P22 Mackinac Pro";
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 31.2%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -184,9 +182,9 @@
 }
 
 .font-mobile-h5---mobile {
-  font-family: "Arial";
+  font-family: "P22 Mackinac Pro";
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 26.4%;
   letter-spacing: 0px;
   text-decoration: none;
@@ -194,7 +192,7 @@
 }
 
 .font-mobile-p1---mobile {
-  font-family: "Arial";
+  font-family: "Red Hat Display";
   font-size: 18px;
   font-weight: 400;
   line-height: 21.6%;
@@ -204,7 +202,7 @@
 }
 
 .font-mobile-p2---mobile {
-  font-family: "Arial";
+  font-family: "Red Hat Display";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.2%;
@@ -214,7 +212,7 @@
 }
 
 .font-mobile-p3---mobile {
-  font-family: "Arial";
+  font-family: "Red Hat Display";
   font-size: 14px;
   font-weight: 400;
   line-height: 16.8%;
@@ -224,7 +222,7 @@
 }
 
 .font-mobile-p4---mobile {
-  font-family: "Arial";
+  font-family: "Red Hat Display";
   font-size: 12px;
   font-weight: 400;
   line-height: 14.4%;
@@ -233,23 +231,23 @@
   text-transform: none;
 }
 
-.font-mobile-button-lrg---mobile {
-  font-family: "Arial";
+.font-mobile-button-lrg---desktop {
+  font-family: "Red Hat Display";
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 14.4%;
-  letter-spacing: 0.48px;
+  letter-spacing: 1.2px;
   text-decoration: none;
-  text-transform: none;
+  text-transform: uppercase;
 }
 
-.font-mobile-button-small---mobile {
-  font-family: "Arial";
+.font-mobile-button-small---desktop {
+  font-family: "Red Hat Display";
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 12%;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.8px;
   text-decoration: none;
-  text-transform: none;
+  text-transform: uppercase;
 }
 

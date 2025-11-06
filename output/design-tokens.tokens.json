@@ -1,13 +1,25 @@
 {
   "color": {
-    "primary light": {
+    "heading": {
       "description": "",
       "type": "color",
-      "value": "#e17240ff",
+      "value": "#35332fff",
       "blendMode": "normal",
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:7830561726ccee2dc0f347a2bb0652a3949522fb,",
+          "styleId": "S:0e15392916716690f71c490d23efb5e871bef18e,",
+          "exportKey": "color"
+        }
+      }
+    },
+    "hover": {
+      "description": "",
+      "type": "color",
+      "value": "#60869fff",
+      "blendMode": "normal",
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:5db4100eb2d0f5bbaa26d4ffcdbaab618c50cb09,",
           "exportKey": "color"
         }
       }
@@ -15,95 +27,59 @@
     "primary dark": {
       "description": "",
       "type": "color",
-      "value": "#074568ff",
+      "value": "#123850ff",
       "blendMode": "normal",
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:44eda09ef6c77313732dfcfaecba9edafebd061e,",
+          "styleId": "S:ab579b00d2df8be5d2245f4a5b26dca5f87e4fc4,",
           "exportKey": "color"
         }
       }
     },
-    "primary medium": {
+    "light background": {
+      "description": "",
+      "type": "color",
+      "value": "#fff8f5ff",
+      "blendMode": "normal",
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:06aecf2efe3637714dcd9fb60df64a65caaf1632,",
+          "exportKey": "color"
+        }
+      }
+    },
+    "medium background": {
+      "description": "",
+      "type": "color",
+      "value": "#fff2ecff",
+      "blendMode": "normal",
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:941b15b5927e3cb114dff3d8dedae59527158aba,",
+          "exportKey": "color"
+        }
+      }
+    },
+    "light stroke": {
       "description": "",
       "type": "color",
       "value": "#d9d9d9ff",
       "blendMode": "normal",
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:f3fe19bcd8b68bd65128d9c96a2244a108921336,",
+          "styleId": "S:f5b357423d1c48a2b107fa89e85a30c6843ea747,",
           "exportKey": "color"
         }
       }
     },
-    "header": {
-      "description": "",
-      "type": "color",
-      "value": "#04344fff",
-      "blendMode": "normal",
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:2ee55654d8eafb64b2d3e112c6af2017b4b9412d,",
-          "exportKey": "color"
-        }
-      }
-    },
-    "paragraph": {
-      "description": "",
-      "type": "color",
-      "value": "#000000ff",
-      "blendMode": "normal",
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:40ea794a76a36352930b92a6d175be5a7e5bd645,",
-          "exportKey": "color"
-        }
-      }
-    },
-    "primary button": {
-      "description": "",
-      "type": "color",
-      "value": "#e17240ff",
-      "blendMode": "normal",
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:453e4d966403872d903a063afff5987326216a1c,",
-          "exportKey": "color"
-        }
-      }
-    },
-    "secondary button": {
+    "flat white": {
       "description": "",
       "type": "color",
       "value": "#ffffffff",
       "blendMode": "normal",
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:fee83dd891877eff7cb0b03ff7daaff35a10b206,",
-          "exportKey": "color"
-        }
-      }
-    },
-    "primary button - hover": {
-      "description": "",
-      "type": "color",
-      "value": "#ffc6acff",
-      "blendMode": "normal",
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:244029f6c8457ad2f0be4c15a1aeca82ef88247a,",
-          "exportKey": "color"
-        }
-      }
-    },
-    "secondary button - hover": {
-      "description": "",
-      "type": "color",
-      "value": "#8ad5ffff",
-      "blendMode": "normal",
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:68403d5ca6a793aadb688d4fb260d66c373ede6b,",
+          "styleId": "S:62f6fc5e88359dd088639a1cf798ce638f4385ef,",
           "exportKey": "color"
         }
       }
@@ -111,13 +87,13 @@
   },
   "font": {
     "desktop": {
-      "display 1": {
+      "display - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 92,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -128,18 +104,18 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:087778b1372137600219eae2ac41e255ec7b817f,",
+            "styleId": "S:3a1e0613a10c86fbe95af88b2578c5699650f2d2,",
             "exportKey": "font"
           }
         }
       },
-      "h1": {
+      "h1 - deskop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 62,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -150,18 +126,18 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:65d79fd98c2cb9dddc1750aa700ed91d9c6f6e16,",
+            "styleId": "S:60549b0974970c9600b177a03d7a2cacd1f30d51,",
             "exportKey": "font"
           }
         }
       },
-      "h2": {
+      "h2 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 48,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -172,18 +148,18 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:a1f58e21cab3c0c92126313b58e91917739be51f,",
+            "styleId": "S:f33947f7d819f959de814a4124478aab6b40bb14,",
             "exportKey": "font"
           }
         }
       },
-      "h3": {
+      "h3 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 40,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -194,18 +170,18 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:24826d5ced8a91ff43723b7704b8c39486c52628,",
+            "styleId": "S:9553a08886951cbb69574c2ce04aeb95185e8e9f,",
             "exportKey": "font"
           }
         }
       },
-      "h4": {
+      "h4 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 32,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -216,18 +192,18 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:7508c73e531b121fdaf175735691cbffe6afbc28,",
+            "styleId": "S:51dfce2acf7ad4a771ebfea6170b3621c20696d3,",
             "exportKey": "font"
           }
         }
       },
-      "h5": {
+      "h5 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 24,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -238,17 +214,17 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:35a95267deefa67d0d3c114cbee5d3454e1e65a0,",
+            "styleId": "S:2551f0db4142ab34d5c70d8a84414dffde31c121,",
             "exportKey": "font"
           }
         }
       },
-      "p1": {
+      "p1 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 22,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -260,17 +236,17 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:2df83f39dc0e3ce9dddd45d512d5ef56cd5ae8a6,",
+            "styleId": "S:09bd5fb66fe26f69cb48fc538f15ca300c0fbab9,",
             "exportKey": "font"
           }
         }
       },
-      "p2": {
+      "p2 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 18,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -282,17 +258,17 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:4c165ef10630d2ec4d40a6dccd744bb9a1158628,",
+            "styleId": "S:075cf0ff05314f147a674316e3be1179111f020f,",
             "exportKey": "font"
           }
         }
       },
-      "p3": {
+      "p3 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 16,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -304,17 +280,17 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:5cb3b1f7a493c2d35e827dfd1ac34a10e2d4e732,",
+            "styleId": "S:6a64788a55d513deaabe59d3b69de59d8425bb51,",
             "exportKey": "font"
           }
         }
       },
-      "p4": {
+      "p4 - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -326,21 +302,21 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:f5a94c2ce9419a6170c6806e8d139a9317a6937d,",
+            "styleId": "S:8da16a02d52dc04b47c1b8df8a04e7eed60c4ba9,",
             "exportKey": "font"
           }
         }
       },
-      "button lrg": {
+      "button lrg - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 16,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "Red Hat Display",
+          "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.48,
+          "letterSpacing": 1.6,
           "lineHeight": 19.2,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -348,21 +324,21 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:fdd58d32f033e68cf1f16e00c973513893cea66a,",
+            "styleId": "S:36c1c67dc8cffc67d258d5946f21796f5c0314ac,",
             "exportKey": "font"
           }
         }
       },
-      "button small": {
+      "button small - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "Red Hat Display",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": 0.96,
           "lineHeight": 14.4,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -370,20 +346,20 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:2ef5562da799d430d96407b3f5fe1da14ce150fe,",
+            "styleId": "S:476079c3877fa8c927d4a99d2356c00b0526f9e9,",
             "exportKey": "font"
           }
         }
       }
     },
     "mobile": {
-      "display 1 - mobile": {
+      "display - mobile": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 52,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -394,7 +370,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:c6fca723fdc17eedf3159625b3cadcd5bc30c0dd,",
+            "styleId": "S:45b1bd567fe02a6fd5190eea2d76c14aea4fa845,",
             "exportKey": "font"
           }
         }
@@ -404,8 +380,8 @@
         "value": {
           "fontSize": 46,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -416,7 +392,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:6dc114f99db0bc551ea7bfb76685459748e12c87,",
+            "styleId": "S:5835d2b7c6f7dbd9bdb7608c50f01ae2d20136a7,",
             "exportKey": "font"
           }
         }
@@ -426,8 +402,8 @@
         "value": {
           "fontSize": 36,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -438,7 +414,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:b49e627b666445c3ba476e8d3df7b2096a11078c,",
+            "styleId": "S:47c27b1158617d0a948a268b5013f2c718e121cb,",
             "exportKey": "font"
           }
         }
@@ -448,8 +424,8 @@
         "value": {
           "fontSize": 32,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -460,7 +436,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:6141e1666bf71badea7437b1af07fa5eab9d27fe,",
+            "styleId": "S:bc2011429310a0fc8cd2714c5733668a39bd2c5a,",
             "exportKey": "font"
           }
         }
@@ -470,8 +446,8 @@
         "value": {
           "fontSize": 26,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -482,7 +458,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:f44a7f1ea075b6249f48e9683b9dc83387b376fe,",
+            "styleId": "S:28b920b5629fb86561550304679b9df36f11e18d,",
             "exportKey": "font"
           }
         }
@@ -492,8 +468,8 @@
         "value": {
           "fontSize": 22,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "P22 Mackinac Pro",
+          "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -504,7 +480,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:5e761a9007f162a6c9183c5b578aaf78d54270ef,",
+            "styleId": "S:65a65e7f28d9c97f908fed65f94dd56c31cebbb9,",
             "exportKey": "font"
           }
         }
@@ -514,7 +490,7 @@
         "value": {
           "fontSize": 18,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -526,7 +502,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:93d8b2d5f8e97fc27062a8e1e1f216b41b382409,",
+            "styleId": "S:4c760be996975bfbf0bf9cc5a49dc019a2e85637,",
             "exportKey": "font"
           }
         }
@@ -536,7 +512,7 @@
         "value": {
           "fontSize": 16,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -548,7 +524,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:9e388420c2a37905a84dc5baa689e019415d1c3c,",
+            "styleId": "S:5f3f13925eeae323b71e692b12f5a371ac19c353,",
             "exportKey": "font"
           }
         }
@@ -558,7 +534,7 @@
         "value": {
           "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -570,7 +546,7 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:097ac0d031ed999ae2b6e39a679b41cae1550b08,",
+            "styleId": "S:8532244dfd5b1bd8fa847200e3aae19f2e423bdd,",
             "exportKey": "font"
           }
         }
@@ -580,7 +556,7 @@
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Arial",
+          "fontFamily": "Red Hat Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -592,51 +568,51 @@
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:63c0a85eecbc3bd6af1fe2b8410bd4f249d308d3,",
+            "styleId": "S:3bfe012c305e6f5fb51f8a41fc0e7fc8e1f1ce66,",
             "exportKey": "font"
           }
         }
       },
-      "button lrg - mobile": {
+      "button lrg - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "Red Hat Display",
+          "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.48,
+          "letterSpacing": 1.2,
           "lineHeight": 14.4,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
-          "textCase": "none"
+          "textCase": "uppercase"
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:f6b4d5c2f2577a1673e6ddae53f8be89a00588f3,",
+            "styleId": "S:f4415d9a51632644ce05f184efa746db31fa2441,",
             "exportKey": "font"
           }
         }
       },
-      "button small - mobile": {
+      "button small - desktop": {
         "type": "custom-fontStyle",
         "value": {
           "fontSize": 10,
           "textDecoration": "none",
-          "fontFamily": "Arial",
-          "fontWeight": 700,
+          "fontFamily": "Red Hat Display",
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.4,
+          "letterSpacing": 0.8,
           "lineHeight": 12,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
-          "textCase": "none"
+          "textCase": "uppercase"
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:605a45f13a6384ea37fe9a04b01a4cd46963f9db,",
+            "styleId": "S:ab3331680224daec71ee7343f9f291134a562e4b,",
             "exportKey": "font"
           }
         }
@@ -645,7 +621,7 @@
   },
   "typography": {
     "desktop": {
-      "display 1": {
+      "display - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 92
@@ -656,11 +632,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -691,7 +667,7 @@
           "value": "none"
         }
       },
-      "h1": {
+      "h1 - deskop": {
         "fontSize": {
           "type": "dimension",
           "value": 62
@@ -702,11 +678,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -737,7 +713,7 @@
           "value": "none"
         }
       },
-      "h2": {
+      "h2 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 48
@@ -748,11 +724,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -783,7 +759,7 @@
           "value": "none"
         }
       },
-      "h3": {
+      "h3 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 40
@@ -794,11 +770,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -829,7 +805,7 @@
           "value": "none"
         }
       },
-      "h4": {
+      "h4 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 32
@@ -840,11 +816,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -875,7 +851,7 @@
           "value": "none"
         }
       },
-      "h5": {
+      "h5 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 24
@@ -886,11 +862,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -921,7 +897,7 @@
           "value": "none"
         }
       },
-      "p1": {
+      "p1 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 22
@@ -932,7 +908,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -967,7 +943,7 @@
           "value": "none"
         }
       },
-      "p2": {
+      "p2 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 18
@@ -978,7 +954,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1013,7 +989,7 @@
           "value": "none"
         }
       },
-      "p3": {
+      "p3 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 16
@@ -1024,7 +1000,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1059,7 +1035,7 @@
           "value": "none"
         }
       },
-      "p4": {
+      "p4 - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 14
@@ -1070,7 +1046,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1105,7 +1081,7 @@
           "value": "none"
         }
       },
-      "button lrg": {
+      "button lrg - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 16
@@ -1116,11 +1092,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 600
         },
         "fontStyle": {
           "type": "string",
@@ -1132,7 +1108,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.48
+          "value": 1.6
         },
         "lineHeight": {
           "type": "dimension",
@@ -1151,7 +1127,7 @@
           "value": "uppercase"
         }
       },
-      "button small": {
+      "button small - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 12
@@ -1162,11 +1138,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -1178,7 +1154,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": 0.96
         },
         "lineHeight": {
           "type": "dimension",
@@ -1199,7 +1175,7 @@
       }
     },
     "mobile": {
-      "display 1 - mobile": {
+      "display - mobile": {
         "fontSize": {
           "type": "dimension",
           "value": 52
@@ -1210,11 +1186,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1256,11 +1232,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1302,11 +1278,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1348,11 +1324,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1394,11 +1370,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1440,11 +1416,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "P22 Mackinac Pro"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 500
         },
         "fontStyle": {
           "type": "string",
@@ -1486,7 +1462,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1532,7 +1508,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1578,7 +1554,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1624,7 +1600,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
@@ -1659,7 +1635,7 @@
           "value": "none"
         }
       },
-      "button lrg - mobile": {
+      "button lrg - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 12
@@ -1670,11 +1646,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 600
         },
         "fontStyle": {
           "type": "string",
@@ -1686,7 +1662,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.48
+          "value": 1.2
         },
         "lineHeight": {
           "type": "dimension",
@@ -1702,10 +1678,10 @@
         },
         "textCase": {
           "type": "string",
-          "value": "none"
+          "value": "uppercase"
         }
       },
-      "button small - mobile": {
+      "button small - desktop": {
         "fontSize": {
           "type": "dimension",
           "value": 10
@@ -1716,11 +1692,11 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Arial"
+          "value": "Red Hat Display"
         },
         "fontWeight": {
           "type": "number",
-          "value": 700
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
@@ -1732,7 +1708,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.4
+          "value": 0.8
         },
         "lineHeight": {
           "type": "dimension",
@@ -1748,7 +1724,7 @@
         },
         "textCase": {
           "type": "string",
-          "value": "none"
+          "value": "uppercase"
         }
       }
     }
